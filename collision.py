@@ -45,15 +45,21 @@ def cubePlayerCollision(player, cube):
     
     if rectCollision(player.vec2.pos[0], player.vec2.pos[1], player.size[0], player.size[1], cube.vec2.pos[0], cube.vec2.pos[1], cube.size[0], cube.size[1]):
         if playerPushingcubeleft or playerPushingcuberight or cubePushingplayerright or cubePushingplayerleft:
-            if cube.hit == False:
+            for hit in cube.hit:
+                if hit == player:
+                    playerhit = True
+            if playerhit == False:
                 collideVelx(player, cube)
-                cube.hit = True
+                cube.hit.append(player)
             else:
                 cube.vec2.vel[0] = player.vec2.vel[0]
         if playerPushingcubeup or playerPushingcubedown or cubePushingplayerdown or cubePushingplayerup:
-            if cube.hit == False:
+            for hit in cube.hit:
+                if hit == player:
+                    playerhit = True
+            if playerhit == False:
                 collideVely(player, cube)
-                cube.hit = True
+                cube.hit.append(player)
             else:
                 cube.vec2.vel[1] = player.vec2.vel[1]
     else:
