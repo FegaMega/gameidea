@@ -42,6 +42,9 @@ class game:
                 
         for cube in self.map.cube:
             collision.cubePlayerCollision(self.player, cube)
+            for cube2 in self.map.cube:
+                if cube != cube2:
+                    collision.cubeCubeCollision(cube, cube2)
 
             
     def Update(self):
