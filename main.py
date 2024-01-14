@@ -6,7 +6,7 @@ def main():
     
     Game.setUp()
     while Game.isRunning() == True:
-        for i in range(0, 10):
+        for i in range(0, 1):
             Game.HandleEvents()
             Game.Update()   
         Game.Render()
