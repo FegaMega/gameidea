@@ -41,10 +41,10 @@ class game:
         self.InputHandler.KeyboardHandler()
                 
         for cube in self.map.cube:
-            collision.cubePlayerCollision(self.player, cube)
             for cube2 in self.map.cube:
                 if cube != cube2:
                     collision.cubeCubeCollision(cube, cube2)
+                collision.cubePlayerCollision(self.player, cube)
 
             
     def Update(self):

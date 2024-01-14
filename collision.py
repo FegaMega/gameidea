@@ -43,33 +43,23 @@ def cubePlayerCollision(player, cube):
     cubePushingplayerup = cube.vec2.pos[1] > player.vec2.pos[1]+(player.size[1]/2) and cube.vec2.vel[1] < player.vec2.vel[1]
     cubePushingplayerdown = bottomOfCube < player.vec2.pos[1]+(player.size[1]/2) and cube.vec2.vel[1] > player.vec2.vel[1]
     
-    playerhit = False
-    
     if rectCollision(player.vec2.pos[0], player.vec2.pos[1], player.size[0], player.size[1], cube.vec2.pos[0], cube.vec2.pos[1], cube.size[0], cube.size[1]):
         if playerPushingcubeleft or playerPushingcuberight or cubePushingplayerright or cubePushingplayerleft:
-            for hit in cube.hit:
-                if hit == player:
-                    playerhit = True
-            if playerhit == False:
+
+            if cube.playerHit == False:
                 collideVelx(player, cube)
-                cube.hit.append(player)
+                cube.playerHit = True
             else:
                 cube.vec2.vel[0] = player.vec2.vel[0]
         if playerPushingcubeup or playerPushingcubedown or cubePushingplayerdown or cubePushingplayerup:
-            for hit in cube.hit:
-                if hit == player:
-                    playerhit = True
-            if playerhit == False:
+            if cube.playerHit == False:
                 collideVely(player, cube)
-                cube.hit.append(player)
+                cube.playerHit = True
             else:
                 cube.vec2.vel[1] = player.vec2.vel[1]
     else:
         i = 0
-        for hit in cube.hit:
-            if hit == player:
-                del cube.hit[i]
-            i +=1
+        cube.playerHit = False
 
 
 def cubeCubeCollision(cube, cube2):
@@ -85,16 +75,16 @@ def cubeCubeCollision(cube, cube2):
     
     
     
-    cubePushingplayerright = rightOfCube < cube2.vec2.pos[0]+(cube2.size[0]/2) and cube.vec2.vel[0] > cube2.vec2.vel[0]
-    cubePushingplayerleft = cube.vec2.pos[0] > cube2.vec2.pos[0]+(cube2.size[0]/2) and cube.vec2.vel[0] < cube2.vec2.vel[0]
-    cubePushingplayerup = cube.vec2.pos[1] > cube2.vec2.pos[1]+(cube2.size[1]/2) and cube.vec2.vel[1] < cube2.vec2.vel[1]
-    cubePushingplayerdown = bottomOfCube < cube2.vec2.pos[1]+(cube2.size[1]/2) and cube.vec2.vel[1] > cube2.vec2.vel[1]
+    cubePushingcube2right = rightOfCube < cube2.vec2.pos[0]+(cube2.size[0]/2) and cube.vec2.vel[0] > cube2.vec2.vel[0]
+    cubePushingcube2left = cube.vec2.pos[0] > cube2.vec2.pos[0]+(cube2.size[0]/2) and cube.vec2.vel[0] < cube2.vec2.vel[0]
+    cubePushingcube2up = cube.vec2.pos[1] > cube2.vec2.pos[1]+(cube2.size[1]/2) and cube.vec2.vel[1] < cube2.vec2.vel[1]
+    cubePushingcube2down = bottomOfCube < cube2.vec2.pos[1]+(cube2.size[1]/2) and cube.vec2.vel[1] > cube2.vec2.vel[1]
     
 
     cubehit = False
 
     if rectCollision(cube2.vec2.pos[0], cube2.vec2.pos[1], cube2.size[0], cube2.size[1], cube.vec2.pos[0], cube.vec2.pos[1], cube.size[0], cube.size[1]):
-        if cube2Pushingcubeleft or cube2Pushingcuberight or cubePushingplayerright or cubePushingplayerleft:
+        if cube2Pushingcubeleft or cube2Pushingcuberight or cubePushingcube2right or cubePushingcube2left:
             for hit in cube.hit:
                 if hit == cube2:
                     cubehit = True
@@ -105,9 +95,12 @@ def cubeCubeCollision(cube, cube2):
                 collideVelx(cube2, cube)
                 cube.hit.append(cube2)
                 cube2.hit.append(cube)
-            else:
-                cube.vec2.vel[0] = cube2.vec2.vel[0]
-        if cube2Pushingcubeup or cube2Pushingcubedown or cubePushingplayerdown or cubePushingplayerup:
+            elif cube.vec2.vel[0] < 0 and cube2.vec2.vel[0] < 0 or cube2.vec2.vel[0] > 0 and cube.vec2.vel[0] > 0:
+                if cube2Pushingcuberight or cube2Pushingcubeleft:
+                    cube.vec2.vel[0] = cube2.vec2.vel[0]
+                elif cubePushingcube2right or cubePushingcube2left:
+                    cube2.vec2.vel[0] = cube.vec2.vel[0]
+        if cube2Pushingcubeup or cube2Pushingcubedown or cubePushingcube2down or cubePushingcube2up:
             for hit in cube.hit:
                 if hit == cube2:
                     cubehit = True
@@ -118,8 +111,11 @@ def cubeCubeCollision(cube, cube2):
                 collideVely(cube2, cube)
                 cube.hit.append(cube2)
                 cube2.hit.append(cube)
-            else:
-                cube.vec2.vel[1] = cube2.vec2.vel[1]
+            elif cube.vec2.vel[1] < 0.1 and cube2.vec2.vel[1] < 0.1 or cube2.vec2.vel[1] > -0.1 and cube.vec2.vel[1] > -0.1:
+                if cube2Pushingcubedown or cube2Pushingcubeup:
+                    cube.vec2.vel[1] = cube2.vec2.vel[1]
+                elif cubePushingcube2down or cubePushingcube2up:
+                    cube2.vec2.vel[1] = cube.vec2.vel[1]
     else:
         i = 0
         for hit in cube.hit:
@@ -131,3 +127,4 @@ def cubeCubeCollision(cube, cube2):
             if hit == cube:
                 del cube2.hit[i]
             i +=1
+        print(cube2.hit, cube.hit)
