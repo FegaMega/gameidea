@@ -5,35 +5,6 @@ class InputHandler:
         self.player = player
         self.deltaTimeEstimate = 16
         self.utils = utils
-    def DOWNKeyboardHandler(self, event):
-        return 0
-        #match event.key:
-        #    
-        #    case pygame.K_w:
-        #        
-        #        self.player.vec2.addToVel([0, (-5/self.deltaTimeEstimate)])
-        #    case pygame.K_s:
-        #        self.player.vec2.addToVel([0,(5/self.deltaTimeEstimate)])
-        #    case pygame.K_a:
-        #        self.player.vec2.addToVel([(-5/self.deltaTimeEstimate), 0])
-        #    case pygame.K_d:
-        #        self.player.vec2.addToVel([(5/self.deltaTimeEstimate), 0])
-            
-    def UPKeyboardHandler(self, event):
-        return 0
-        #match event.key:
-        #    case pygame.K_w:
-        #        if self.player.vec2.vel[1] < -0.01:
-        #            self.player.vec2.vel[1] = 0
-        #    case pygame.K_s:
-        #        if self.player.vec2.vel[1] > 0.01:
-        #            self.player.vec2.vel[1] = 0
-        #    case pygame.K_a:
-        #        if self.player.vec2.vel[0] < -0.01:
-        #            self.player.vec2.vel[0] = 0
-        #    case pygame.K_d:
-        #        if self.player.vec2.vel[0] > 0.01:
-        #            self.player.vec2.vel[0] = 0
 
     def KeyboardHandler(self):
         for key in self.utils.Keys:

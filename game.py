@@ -39,12 +39,17 @@ class game:
                         
         
         self.InputHandler.KeyboardHandler()
-                
         for cube in self.map.cube:
-            for cube2 in self.map.cube:
-                if cube != cube2:
-                    collision.cubeCubeCollision(cube, cube2)
-                collision.cubePlayerCollision(self.player, cube)
+            collision.cubePlayerCollision(self.player, cube)
+        for i in range(0, len(self.map.cube)):
+            for n in range(i+1, len(self.map.cube)):
+                collision.cubeCubeCollision(self.map.cube[i], self.map.cube[n])
+
+            
+        #    for cube2 in self.map.cube:
+        #        if cube != cube2:
+        #            collision.cubeCubeCollision(cube, cube2)
+        #        collision.cubePlayerCollision(self.player, cube)
 
             
     def Update(self):
