@@ -128,4 +128,3 @@ def cubeCubeCollision(cube, cube2):
             if hit == cube:
                 del cube2.hit[i]
             i +=1
-        print(cube2.hit, cube.hit)
