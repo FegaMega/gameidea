@@ -14,7 +14,7 @@ class Map:
         self.loadedChunks = []
         self.loadedChunksPos = [0, 0]
         self.doors = []
-        self.cube = [Objects.MovingCube((100, 100), 2, 10), Objects.MovingCube((100, 150), 2, 10), Objects.MovingCube((200, 100), 2, 10)]
+        self.cube = [Objects.MovingCube((100, 100), 2, 100), Objects.MovingCube((100, 150), 2, 100), Objects.MovingCube((200, 100), 2, 100)]
     
     def addToLevel(self, posX, posY, layer: int, add):
         if layer > 3 or layer < 0:
