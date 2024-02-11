@@ -50,12 +50,16 @@ def cubePlayerCollision(player, cube):
                 collideVelx(player, cube)
                 cube.playerHit = True
             else:
-                cube.vec2.vel[0] = player.vec2.vel[0]
+                if (player.weight/cube.weight)<1:
+                    player.vec2.vel[0] *= (player.weight/cube.weight)
+                cube.vec2.vel[0] = player.vec2.vel[0] * (player.weight/cube.weight)
         if playerPushingcubeup or playerPushingcubedown or cubePushingplayerdown or cubePushingplayerup:
             if cube.playerHit == False:
                 collideVely(player, cube)
                 cube.playerHit = True
             else:
+                if (player.weight/cube.weight)<1:
+                    player.vec2.vel[1] *= (player.weight/cube.weight)
                 cube.vec2.vel[1] = player.vec2.vel[1]
     else:
         i = 0
