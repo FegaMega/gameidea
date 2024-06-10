@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-import Map
+import Map2
 import inputHandler
 import player
 import utils
@@ -9,7 +9,7 @@ import vector2
 class game:
     def __init__(self):
         self.utilities = utils.utils()
-        self.map = Map.Map()
+        self.map = Map2.Map()
         self.player = player.player([320, 320], self.utilities, self.map)
         self.InputHandler = inputHandler.InputHandler(self.player, self.utilities)
         self.deltaTime = 0
