@@ -39,7 +39,6 @@ class Map:
         for y in range(0, int(self.LevelPixelSize[1]/self.BackroundLevelPartSize[1])):
             for x in range(0, int(self.LevelPixelSize[0]/self.BackroundLevelPartSize[0])):
                 pos = [x*self.BackroundLevelPartSize[0], y*self.BackroundLevelPartSize[1]]
-                print(pos)
                 if self.JsonLevel[y][x] == 0:
                     continue
                 if self.JsonLevel[y][x] == 1:
