@@ -14,7 +14,7 @@ class Map:
         self.loadedChunks = []
         self.loadedChunksPos = [0, 0]
         self.doors = []
-        self.cube = [Objects.MovingCube((100, 100), 2, 100), Objects.MovingCube((100, 150), 2, 100), Objects.MovingCube((200, 100), 2, 100)]
+        self.cube = [Objects.MovingCube((100, 100), 2, 10), Objects.MovingCube((100, 150), 2, 10), Objects.MovingCube((200, 100), 2, 10)]
 
         self.map = [
             pygame.Surface(self.LevelPixelSize),

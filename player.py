@@ -11,8 +11,8 @@ class player:
         self.accel = 2
         self.map = map
         self.utilities = utils
-        self.weight = 1000
-        self.notrunningFriction = 0.99
+        self.weight = 10
+        self.notrunningFriction = 0.1
         self.camera = camera.camera([0, 0], self.utilities, self.map)
         self.maxSpeed = .25
     def draw(self, screen, shift):
