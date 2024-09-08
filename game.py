@@ -37,7 +37,7 @@ class game:
                     if i[0] == event.key:
                         i[1] = False
                         
-        
+        self.map.collision(self.player)
         self.InputHandler.KeyboardHandler()
 
 

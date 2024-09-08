@@ -60,7 +60,6 @@ class Map:
         for door in self.doors:
             self.addToLevel(door.vec2.pos[0], door.vec2.pos[1], door.layer, door)
         
-        
         #LoadedChunks
         left = 0
         right = int((screenSize[0] + (4*self.chunkSize[0])) / self.chunkSize[0])
@@ -74,7 +73,7 @@ class Map:
                 self.loadedChunks[chunkY].append(self.Level[y][x])
                 chunkX += 1
             chunkY +=1
-        self.JsonLevel = []
+        
         return 0
     
 
@@ -106,8 +105,50 @@ class Map:
                         else:
                             part.draw(screen, shift)
         return 0
-    def collion(self, player):
-        player.vec2.pos[0]// 32
+    def collision(self, player):
+        collisionList = [
+            self.JsonLevel[int ((player.vec2.pos[1] + 1)// 32)][int((player.vec2.pos[0]+1) // 32)],                 # above
+            self.JsonLevel[int ((player.vec2.pos[1]+1) // 32)][int((player.vec2.pos[0]+1) // 32 )],                 # same as above but handled as to the left
+            self.JsonLevel[int ((player.vec2.pos[1] + player.size[1]-1) // 32)][int((player.vec2.pos[0]+1) // 32)], # below
+            self.JsonLevel[int ((player.vec2.pos[1]+1) // 32)][int((player.vec2.pos[0] + player.size[0]-1) // 32 )],# to the right 
+            self.Level[int (player.vec2.pos[1] // 32)][int(player.vec2.pos[0] // 32)][1],
+            self.Level[int (player.vec2.pos[1] // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][1],
+            self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int(player.vec2.pos[0] // 32)][1],
+            self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][1],
+            self.Level[int (player.vec2.pos[1] // 32)][int(player.vec2.pos[0] // 32)][2],
+            self.Level[int (player.vec2.pos[1] // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][2],
+            self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int (player.vec2.pos[0] // 32)][2],
+            self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][2]
+            ]
+        def y():
+            if player.vec2.vel[1] < 0:
+                if collisionList[0] > 1:
+                    print(0, (31 - (player.vec2.pos[1] % 32) ))
+                    player.vec2.pos[1] += (31 - (player.vec2.pos[1] % 32) )
+                    player.vec2.vel[1] = 0
+            else:
+                if collisionList[2] > 1:
+                    print(2, (player.vec2.pos[1] + player.size[1]-1) % 32)
+                    player.vec2.pos[1] -= (player.vec2.pos[1] + player.size[1]-1) % 32 
+                    player.vec2.vel[1] = 0
+        def x():
+            if player.vec2.vel[0] < 0:
+                if collisionList[1] > 1:
+                    print(1, (31 - (player.vec2.pos[0] % 32) ))
+                    player.vec2.pos[0] += (31 - (player.vec2.pos[0] % 32) )
+                    player.vec2.vel[0] = 0
+            else:
+                if collisionList[3] > 1:
+                    print(3, (player.vec2.pos[0] + player.size[0]-1) % 32 )
+                    player.vec2.pos[0] -= (player.vec2.pos[0] + player.size[0]-1) % 32 
+                    player.vec2.vel[0] = 0
+        if abs(player.vec2.pos[0]) - abs(player.vec2.pos[1]) > 0:
+            x()
+            y()
+        else:
+            y()
+            x()
+            
     def drawAbovePlayer(self, screen, shift:list):
         surfaceFloor = pygame.image.load(self.BackroundLevel[0])
         surfaceWall = pygame.image.load(self.BackroundLevel[1])
