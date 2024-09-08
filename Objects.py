@@ -18,8 +18,9 @@ class MovingCube:
         self.surface = pygame.image.load("data/img/black.png")
         self.rect = pygame.Rect(self.vec2.pos, self.size)
         self.weight = weight
-        self.hit = []
+        self.hit: MovingCube = []
         self.playerHit = False
+
     def update(self, deltaTime, friction):
         
         if self.playerHit == False:
@@ -32,4 +33,3 @@ class MovingCube:
         pygame.draw.rect(screen, (0, 0, 0), self.rect)
         self.rect.x = self.vec2.pos[0]
         self.rect.y = self.vec2.pos[1]
-    

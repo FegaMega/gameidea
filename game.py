@@ -39,19 +39,12 @@ class game:
                         
         
         self.InputHandler.KeyboardHandler()
-        for cube in self.map.cube:
-            collision.cubePlayerCollision(self.player, cube)
-        for i in range(0, len(self.map.cube)):
-            for n in range(i+1, len(self.map.cube)):
-                collision.cubeCubeCollision(self.map.cube[i], self.map.cube[n])
+
 
             
     def Update(self):
         self.player.update(self.utilities.friction)
         self.map.getCloseLevelparts(self.player.camera, self.utilities.screenSize)
-        for cube in self.map.cube:
-            cube.update(self.utilities.deltaTime, self.utilities.friction)
-        pygame.display.update()
         self.utilities.DeltaTime()
         
 
@@ -62,6 +55,7 @@ class game:
         self.map.draw(self.utilities.screen, shift)
         self.player.draw(self.utilities.screen, shift)
         self.map.drawAbovePlayer(self.utilities.screen, shift)
+        pygame.display.update()
     def FinishCalculations(self):
         pygame.time.Clock().tick(self.utilities.FPS)
 

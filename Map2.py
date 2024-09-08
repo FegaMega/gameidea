@@ -14,7 +14,7 @@ class Map:
         self.loadedChunks = []
         self.loadedChunksPos = [0, 0]
         self.doors = []
-        self.cube = [Objects.MovingCube((100, 100), 2, 10), Objects.MovingCube((100, 150), 2, 10), Objects.MovingCube((200, 100), 2, 10)]
+
 
         self.map = [
             pygame.Surface(self.LevelPixelSize),
@@ -59,8 +59,7 @@ class Map:
 
         for door in self.doors:
             self.addToLevel(door.vec2.pos[0], door.vec2.pos[1], door.layer, door)
-        for cube in self.cube:
-            self.movingLevel.append(cube)
+        
         
         #LoadedChunks
         left = 0
@@ -106,9 +105,9 @@ class Map:
                                             screen.blit(surfaceWall, pos)
                         else:
                             part.draw(screen, shift)
-        for part in self.movingLevel:
-            part.draw(screen, shift)
         return 0
+    def collion(self, player):
+        player.vec2.pos[0]// 32
     def drawAbovePlayer(self, screen, shift:list):
         surfaceFloor = pygame.image.load(self.BackroundLevel[0])
         surfaceWall = pygame.image.load(self.BackroundLevel[1])
