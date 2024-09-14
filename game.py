@@ -8,11 +8,13 @@ import collision
 import vector2
 class game:
     def __init__(self):
+        pygame.init()
         self.utilities = utils.utils()
         self.map = Map2.Map()
         self.player = player.player([320, 320], self.utilities, self.map)
         self.InputHandler = inputHandler.InputHandler(self.player, self.utilities)
         self.deltaTime = 0
+        self.debug = False
         
 
     def setUp(self):
@@ -28,6 +30,9 @@ class game:
             if event.type == KEYDOWN:
                 for i in self.utilities.Keys:
                     if i[0] == event.key:
+                        if event.key == K_o:
+                            self.debug = not self.debug
+                        
                         i[1] = True
                         break
                     elif i == self.utilities.Keys[len(self.utilities.Keys)-1]:
@@ -35,6 +40,7 @@ class game:
             if event.type == KEYUP:
                 for i in self.utilities.Keys:
                     if i[0] == event.key:
+                        
                         i[1] = False
                         
         self.map.collision(self.player)
@@ -55,6 +61,8 @@ class game:
         self.map.draw(self.utilities.screen, shift)
         self.player.draw(self.utilities.screen, shift)
         self.map.drawAbovePlayer(self.utilities.screen, shift)
+        if self.debug == True:
+            self.utilities.screen.blit(self.map.debugWindow(self.utilities.Font), (0, 0))
         pygame.display.update()
     def FinishCalculations(self):
         pygame.time.Clock().tick(self.utilities.FPS)

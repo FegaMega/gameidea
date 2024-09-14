@@ -12,6 +12,7 @@ class utils:
         self.running = True
         self.friction = .9
         self.Keys = [[pygame.K_w, False]]
+        self.Font = pygame.font.SysFont("Helvetica-bold", 20)
     def DeltaTime(self):
         self.deltaTime = self.get_ticks() - self.lastFrameTime
         self.lastFrameTime = self.get_ticks()
@@ -21,3 +22,5 @@ class utils:
         self.screen = pygame.display.set_mode(screenSize, flags, depth, display, vsync)
         self.screenSize = screenSize
         return self.screen
+    
+#globals

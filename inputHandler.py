@@ -5,7 +5,6 @@ class InputHandler:
         self.player = player
         self.deltaTimeEstimate = 16
         self.utils = utils
-
     def KeyboardHandler(self):
         for key in self.utils.Keys:
             if key[0] ==  pygame.K_w:
@@ -35,4 +34,5 @@ class InputHandler:
                 else:
                     if self.player.vec2.vel[0] > 0:
                         self.player.vec2.vel[0] = self.player.vec2.vel[0]*self.player.notrunningFriction
+            
                 
