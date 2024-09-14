@@ -29,7 +29,7 @@ class Map:
             print("layer invalid", layer)
             return 1
         levelPos = [posX//self.chunkSize[0], posY//self.chunkSize[1]]
-        self.Level[layer][levelPos[0]][levelPos[1]].append(add)
+        self.Level[levelPos[0]][levelPos[1]][layer].append(add)
         return 0
 
 
@@ -112,16 +112,20 @@ class Map:
                 self.JsonLevel[int ((player.vec2.pos[1] + 1)// 32)][int((player.vec2.pos[0] + player.size[0]/2) // 32)],                 # above
                 self.JsonLevel[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0]+1) // 32 )],                 # left
                 self.JsonLevel[int ((player.vec2.pos[1] + player.size[1]-1) // 32)][int((player.vec2.pos[0] + player.size[0]/2) // 32)], # below
-                self.JsonLevel[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0] + player.size[0]-1) // 32 )],# right 
-            ]
-            #self.Level[int (player.vec2.pos[1] // 32)][int(player.vec2.pos[0] // 32)][1],
-            #self.Level[int (player.vec2.pos[1] // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][1],
-            #self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int(player.vec2.pos[0] // 32)][1],
-            #self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][1],
-            #self.Level[int (player.vec2.pos[1] // 32)][int(player.vec2.pos[0] // 32)][2],
-            #self.Level[int (player.vec2.pos[1] // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][2],
-            #self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int (player.vec2.pos[0] // 32)][2],
-            #self.Level[int ((player.vec2.pos[1] + player.size[1]) // 32)][int((player.vec2.pos[0] + player.size[0]) // 32 )][2]
+                self.JsonLevel[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0] + player.size[0]-1) // 32 )]# right 
+            ],
+            #[ #Layer 2
+            #    self.Level[int ((player.vec2.pos[1] + 1)// 32)][int((player.vec2.pos[0] + player.size[0]/2) // 32)][1],                 # above 
+            #    self.Level[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0]+1) // 32 )][1],                 # left
+            #    self.Level[int ((player.vec2.pos[1] + player.size[1]-1) // 32)][int((player.vec2.pos[0] + player.size[0]/2) // 32)][1], # below
+            #    self.Level[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0] + player.size[0]-1) // 32 )][1]# right 
+            #],
+            #[ #Layer 3 
+            #    self.Level[int ((player.vec2.pos[1] + 1)// 32)][int((player.vec2.pos[0] + player.size[0]/2) // 32)][2],                 # above
+            #    self.Level[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0]+1) // 32 )][2],                 # left
+            #    self.Level[int ((player.vec2.pos[1] + player.size[1]-1) // 32)][int((player.vec2.pos[0] + player.size[0]/2) // 32)][2], # below
+            #    self.Level[int ((player.vec2.pos[1] + player.size[1]/2) // 32)][int((player.vec2.pos[0] + player.size[0]-1) // 32 )][2] # right 
+            #]
             ]
         
         def y(layer: int):
