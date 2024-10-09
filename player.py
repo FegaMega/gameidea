@@ -8,7 +8,7 @@ class player:
         self.surface = pygame.image.load("data/img/player.png")
         self.rect = pygame.Rect(self.vec2.pos, self.size)
         self.Drawrect = pygame.Rect(self.vec2.pos, self.size)
-        self.accel = 2
+        self.accel = .2
         self.map = map
         self.utilities = utils
         self.weight = 10
